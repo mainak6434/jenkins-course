@@ -4,8 +4,7 @@ node {
   def to = emailextrecipients([
           [$class: 'CulpritsRecipientProvider'],
           [$class: 'DevelopersRecipientProvider'],
-          [$class: 'RequesterRecipientProvider'],
-          'mainak6434@yahoo.co.in'
+          [$class: 'RequesterRecipientProvider']
   ])
 
   // job
@@ -28,7 +27,8 @@ node {
     if(to != null && !to.isEmpty()) {
       emailext(body: content, mimeType: 'text/html',
          replyTo: '$DEFAULT_REPLYTO', subject: subject,
-         to: to, attachLog: true )
+         to: 'mainak6434@yahoo.co.in',
+    recipientProviders: [[$class: 'CulpritsRecipientProvider'],[$class: 'RequesterRecipientProvider']],  attachLog: true )
     }
 
     // mark current build as a failure and throw the error
